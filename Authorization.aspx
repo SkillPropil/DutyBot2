@@ -9,6 +9,8 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style type="text/css">
 
+     
+
         body {
             background: #000 url(phonk.jpg); /* Фоновый цвет и фоновый рисунок*/
             color: #fff; /*Цвет текста на странице*/
@@ -58,10 +60,13 @@
         }
 
         .bt_Style {
+  
         }
 
         .tb_Style {
         }
+
+  
     </style>
 </head>
 <body>
@@ -72,8 +77,8 @@
          <br>
         <br>
          <center>
-        <div class="container">
-            <div class ="div">
+        <div class="container" runat="server" id="THEDIV1">
+            <div id="TheDiv" class ="div" runat="server">
                 <h2> Авторизация </h2>
             <asp:Label ID ="lblTitle" runat ="server" CssClass ="font_style"
                 Text ="" Font-Size="X-Large">Логин</asp:Label> 
@@ -83,6 +88,10 @@
                 CssClass ="tb_Style" Width="405px" Height="40px" Font-Size="Medium" ForeColor="#999999"></asp:TextBox>
             
             <br>
+               
+      
+       
+            <br>
                        <asp:Label ID ="Label1" runat ="server" CssClass ="font_style"
                 Text ="" Font-Size="X-Large">Пароль</asp:Label> 
             <br>
@@ -91,9 +100,27 @@
                 CssClass ="tb_Style" Width="405px" Height="40px" Font-Size="Medium" ForeColor="#999999" TextMode="Password"></asp:TextBox>
             <br>
             <br>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+</asp:ScriptManager>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>
             <asp:Button ID ="btEnter" runat ="server" Text ="Войти" 
                 CssClass ="btn btn-danger btn- Button"  Width="203px" Height="45px" ToolTip="Авторизоваться" Font-Size="Medium" OnClick="btEnter_Click" />
-        
+    </ContentTemplate>
+</asp:UpdatePanel>
+                </br>
+        <asp:UpdateProgress ID="prgLoadingStatus" runat="server" DynamicLayout="true">
+    <ProgressTemplate>
+        <div id="overlay ">
+            <div id="modalprogress" class="#modalprogress">
+                <div id="theprogres" class="#theprogress">
+<img src="wait.gif" />
+                    Please wait...
+                </div>
+            </div>
+        </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>
             <br>
             <br>
             

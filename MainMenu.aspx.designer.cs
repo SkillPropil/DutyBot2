@@ -33,6 +33,15 @@ namespace Duty_Bot2
         protected global::System.Web.UI.WebControls.LinkButton LinkSchedule;
 
         /// <summary>
+        /// LinkOtchet элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkOtchet;
+
+        /// <summary>
         /// LinkUser элемент управления.
         /// </summary>
         /// <remarks>

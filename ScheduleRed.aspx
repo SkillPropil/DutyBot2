@@ -7,6 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
      <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function CheckValidInput()
+        {
+            var textLength = $("#tbDate" && "#tbTimeIn" && "#tbTimeOut").val().length;
+
+            if (textLength > 20) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+
+            if (textLength<1) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+            return true;
+        };
+    </script>
      <style type="text/css">
          .bt_Style {
          }
@@ -117,7 +135,10 @@
               
 
                 
-            
+             <asp:Label ID="Label1" runat="server"
+                    Text="Пользователь" CssClass="font_style"></asp:Label>
+
+                <br>
 
                <asp:DropDownList ID="lstUser" runat="server" DataSourceID="sdsUser" DataTextField="UserSurname" DataValueField="ID_User" CssClass="mr-sm-2" Width="280px">
                 </asp:DropDownList>
@@ -128,7 +149,10 @@
              
               
 
-                
+                 <asp:Label ID="Label2" runat="server"
+                    Text="Тип графика" CssClass="font_style"></asp:Label>
+
+                <br>
             
 
                 <asp:DropDownList ID="lstTypeSchedule" runat="server" DataSourceID="sdsTypeSchedule" DataTextField="NameScheduleType" DataValueField="ID_ScheduleType" CssClass="mr-sm-2" Width="280px">
@@ -136,7 +160,13 @@
 
                     
                  <br />
-                <br />
+
+                
+             <br />
+                 <asp:Label ID="Label3" runat="server"
+                    Text="Статус смены" CssClass="font_style"></asp:Label>
+
+                <br>
                <asp:DropDownList ID="lstStatus" runat="server" DataSourceID="sdsStatus" DataTextField="WorkStatus" DataValueField="ID_Status" CssClass="mr-sm-2" Width="280px">
                 </asp:DropDownList>
 
@@ -158,7 +188,7 @@
                 <br />
 
                 
-                <asp:TextBox ID="tbDate" CssClass="text-center textbox" runat ="server" style="margin-left: 0px" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="tbDate" CssClass="text-center textbox" runat ="server" style="margin-left: 0px" TextMode="Month"></asp:TextBox>
                 <br />
 
 
@@ -196,7 +226,7 @@
                     Text="Удалить" OnClick="btDelete_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для удаления" />
 
                 <asp:Button ID="btInsert" runat="server" CssClass=" btn btn-primary"
-                    Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для добавления"/>
+                    OnClientClick="return CheckValidInput()" Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для добавления"/>
                
                 <br />
                 
@@ -206,7 +236,7 @@
               <asp:button ID ="tbBack" class="btn btn-outline-success my-2 my-sm-0" type="submit" runat="server" Text="Назад"  ToolTip="Перейти на главное меню" Width="100px" OnClick="tbBack_Click"></asp:button>
 
                 <asp:Button ID="btUpdate" runat="server" CssClass="btn btn-primary"
-                    Text="Изменить" Width="100px" OnClick="btUpdate_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения" />
+                    OnClientClick="return CheckValidInput()" Text="Изменить" Width="100px" OnClick="btUpdate_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения" />
                 <br />
 
                 <br />

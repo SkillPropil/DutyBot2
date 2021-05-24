@@ -173,8 +173,10 @@ namespace Duty_Bot2
 
         protected void btInsert_Click(object sender, EventArgs e)
         {
-            bool err = false;
+            //string DataValue;
 
+            bool err = false;
+          
             List<TextBox> textBoxes = new List<TextBox>();
             textBoxes.Add(tbDate);
             textBoxes.Add(tbTimeIn);
@@ -191,20 +193,35 @@ namespace Duty_Bot2
                 int User_ID = int.Parse(lstUser.SelectedValue);
                 int TypeSchedule_ID = int.Parse(lstTypeSchedule.SelectedValue);
                 int Status_ID = int.Parse(lstStatus.SelectedValue);
-
-                command.CommandText = "INSERT INTO [dbo].[Schedule] ([WorkDate],[TimeIn],[TimeOut],[User_ID],[ScheduleType_ID],[Status_ID]) values ('" + tbDate.Text + "','" + tbTimeIn.Text + "','" + tbTimeOut.Text + "','" + lstUser.SelectedValue + "','" + lstTypeSchedule.SelectedValue + "','" + lstStatus.SelectedValue + "')";
-
-
-
-                DBConnection.connection.Open();
-                DBConnection.connection.Close();
-                Response.Redirect(Request.RawUrl);
-                gvFill(QR);
-
+                string tbDateValue; 
+                Table_Class DateValue = new Table_Class(DBConnection.qrSchedule);
+                tbDateValue = DateValue.table.Rows[0][3].ToString();
+                if (tbDateValue == tbDate.Text) 
+                {
+                    Response.Write("<script>alert(' Такая дата уже есть ');</script>");
+                }
+              else { 
+                try
+                {
+                    command.CommandText = "INSERT INTO [dbo].[Schedule] ([WorkDate],[TimeIn],[TimeOut],[User_ID],[ScheduleType_ID],[Status_ID]) values ('" + tbDate.Text + "','" + tbTimeIn.Text + "','" + tbTimeOut.Text + "','" + User_ID + "','" + TypeSchedule_ID + "','" + Status_ID + "')";
+                    DBConnection.connection.Open();
+                    command.ExecuteScalar();
+                }
+                catch
+                {
+                        Response.Write("<script>alert(' Такая дата уже есть ');</script>");
+                    }
+                finally
+                {
+                    DBConnection.connection.Close();
+                    gvFill(QR);
+                    gvSchedule.DataBind();
+                }
+              }
             }
         }
 
-        protected void btUpdate_Click(object sender, EventArgs e)
+            protected void btUpdate_Click(object sender, EventArgs e)
         {
             switch (tbDate.Text == "")
             {

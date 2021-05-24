@@ -128,20 +128,35 @@ namespace Duty_Bot2
 
             if (!err)
             {
-                SqlCommand command = new SqlCommand("", DBConnection.connection);
+                try 
+                {  
+                    
+                    SqlCommand command = new SqlCommand("", DBConnection.connection);
 
 
 
 
-                command.CommandText = "INSERT INTO [dbo].[Role] ([RoleName]) values ('" + tbRoleName.Text + "')";
+                 command.CommandText = "INSERT INTO [dbo].[Role] ([RoleName]) values ('" + tbRoleName.Text + "')";
 
 
 
-                DBConnection.connection.Open();
-                command.ExecuteNonQuery();
-                DBConnection.connection.Close();
+                    DBConnection.connection.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                catch
+                {
+                 
+                }
+
+                finally 
+                { 
+                    DBConnection.connection.Close();
+                    
+                }
+
                 Response.Redirect(Request.RawUrl);
-                gvFill(QR);
+                    gvFill(QR);
 
             }
         }
@@ -163,10 +178,11 @@ namespace Duty_Bot2
                     SqlCommand command = new SqlCommand("", DBConnection.connection);
                     command.CommandText = "update [dbo].[Role] set " +
                         "[RoleName] ='" + tbRoleName.Text + "' " +
-                        " where ID_Role = " + DBConnection.IDrecord + "";
-
+                        " where ID_Role = " + DBConnection.IDrecord + ""; 
                     DBConnection.connection.Open();
                     command.ExecuteNonQuery();
+                    
+                    
                     DBConnection.connection.Close();
                     gvFill(QR);
                     Response.Redirect(Request.RawUrl);
@@ -180,12 +196,27 @@ namespace Duty_Bot2
 
         protected void btDelete_Click(object sender, EventArgs e)
         {
-            SqlCommand command = new SqlCommand("", DBConnection.connection);
-            command.CommandText = "delete from [dbo].[Role] " +
-                "where ID_Role = " + DBConnection.IDrecord + "";
-            DBConnection.connection.Open();
-            command.ExecuteNonQuery();
-            DBConnection.connection.Close();
+            try
+            {
+                SqlCommand command = new SqlCommand("", DBConnection.connection);
+                command.CommandText = "delete from [dbo].[Role] " +
+                    "where ID_Role = " + DBConnection.IDrecord + "";
+                DBConnection.connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+            catch 
+            {
+                Response.Write("<script>alert(' Такая дата уже есть ');</script>");
+            }
+            finally
+            {
+
+
+                DBConnection.connection.Close();
+            }
+            
+
             gvFill(QR);
             Response.Redirect(Request.RawUrl);
         }

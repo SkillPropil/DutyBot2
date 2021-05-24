@@ -7,6 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
    <title></title>
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function CheckValidInput()
+        {
+            var textLength = $("#tbName" && "#tbSurname" && "#tbLogin" && "#tbPassword" && "#tbStatus").val().length;
+
+            if (textLength > 20) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+
+            if (textLength<1) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+            return true;
+        };
+    </script>
      <style type="text/css">
          .bt_Style {
          }
@@ -113,7 +131,10 @@
               
 
                 
-            
+             <asp:Label ID="Label1" runat="server"
+                    Text="Роль" CssClass="font_style"></asp:Label>
+
+                </br>
 
                 <asp:DropDownList ID="lstRole" runat="server" DataSourceID="sdsProle" DataTextField="RoleName" DataValueField="ID_Role" CssClass="mr-sm-2" Width="280px">
                 </asp:DropDownList>
@@ -192,7 +213,7 @@
                     Text="Удалить" OnClick="btDelete_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для удаления" />
 
                 <asp:Button ID="btInsert" runat="server" CssClass=" btn btn-primary"
-                    Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для внесения данных"/>
+                  OnClientClick="return CheckValidInput()"  Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для внесения данных"/>
                
                 <br />
                 
@@ -202,7 +223,7 @@
               <asp:button ID ="Button1" class="btn btn-outline-success my-2 my-sm-0" type="submit" runat="server" Text="Назад" Width="90px" ToolTip="Перейти в главное меню" OnClick="Button1_Click" ></asp:button>
 
                 <asp:Button ID="btUpdate" runat="server" CssClass="btn btn-primary"
-                    Text="Изменить" Width="100px" OnClick="btUpdate_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения"/>
+                   OnClientClick="return CheckValidInput()" Text="Изменить" Width="100px" OnClick="btUpdate_Click" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения"/>
                 <br />
 
                 <br />

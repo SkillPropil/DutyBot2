@@ -59,6 +59,9 @@
                         <li class="nav-item active" id="navSchedule">
                             <asp:LinkButton class="nav-link" ID="LinkSchedule" href="Schedule.aspx" runat="server">График</asp:LinkButton>
                         </li>
+                        <li class="nav-item active" id="navOtchet">
+                            <asp:LinkButton class="nav-link" ID="LinkOtchet" href="Otchet.aspx" runat="server">Отчет</asp:LinkButton>
+                        </li>
                         <li class="nav-item active" id="navUser">
                               <asp:LinkButton class="nav-link" ID="LinkUser" href="User.aspx" runat="server" >Добавление учетных записей</asp:LinkButton>
                         </li>

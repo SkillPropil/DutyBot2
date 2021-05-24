@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
+
 namespace Duty_Bot2
 {
     public partial class Authorization : System.Web.UI.Page
@@ -26,12 +29,33 @@ namespace Duty_Bot2
             }
             catch (Exception ex) { return false; }
         }
+        public string encryption(String password)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encrypt;
+            UTF8Encoding encode = new UTF8Encoding();
+            //encrypt the given password string into Encrypted data  
+            encrypt = md5.ComputeHash(encode.GetBytes(password));
+            StringBuilder encryptdata = new StringBuilder();
+            //Create a new string by using the encrypted data  
+            for (int i = 0; i < encrypt.Length; i++)
+            {
+                encryptdata.Append(encrypt[i].ToString());
+            }
+            return encryptdata.ToString();
+        }
 
         protected void btEnter_Click(object sender, EventArgs e)
         {
+           
+            
             /// Получаем данные о пользователе из таблицы
             DBConnection connection = new DBConnection();
-            connection.dbEnter(tbLogin.Text, tbPassword.Text);
+           string password = tbPassword.Text;
+            string Passwords = encryption(password);
+            connection.dbEnter(tbLogin.Text, Passwords.ToString());
+           
+
 
             switch (DBConnection.IDuser)
             {
@@ -44,14 +68,19 @@ namespace Duty_Bot2
                     tbLogin.Text = "";
                     break;
                 default:
+                   
+                    System.Threading.Thread.Sleep(2000);
+                    prgLoadingStatus.Visible = true;
                     /// Определяем имя сессии
-                    Table_Class roletable = new Table_Class(DBConnection.qrUser + string.Format("where [Login] = '{0}' and [Password] = '{1}'", tbLogin.Text, tbPassword.Text));
+                    Table_Class roletable = new Table_Class(DBConnection.qrUser + string.Format("where [Login] = '{0}' and [Password] = '{1}'", tbLogin.Text, Passwords.ToString()));
                     DBConnection.RolePerm_ID = roletable.table.Rows[0][6].ToString();
                     var s = DBConnection.RolePerm_ID;
                     Session["uname"] = tbLogin.Text;
                     Response.Redirect("MainMenu.aspx");
                     break;
             }
+            //prgLoadingStatus.Visible = false;
+
         }
     }
 }

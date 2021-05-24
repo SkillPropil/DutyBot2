@@ -165,10 +165,12 @@
     <Content Include="js\bootstrap.js.map" />
     <Content Include="js\bootstrap.min.js.map" />
     <Content Include="logo.png" />
+    <Content Include="Otchet.aspx" />
     <Content Include="Role.aspx" />
     <Content Include="ScheduleRed.aspx" />
     <Content Include="ScheduleType.aspx" />
     <Content Include="User.aspx" />
+    <Content Include="wait.gif" />
     <Content Include="WorkStatus.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="js\bootstrap.bundle.js" />
@@ -246,6 +248,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ExposionUtility.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -255,6 +258,13 @@
     </Compile>
     <Compile Include="MainMenu.aspx.designer.cs">
       <DependentUpon>MainMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Otchet.aspx.cs">
+      <DependentUpon>Otchet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Otchet.aspx.designer.cs">
+      <DependentUpon>Otchet.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.aspx.cs">

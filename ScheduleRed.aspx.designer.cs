@@ -105,6 +105,15 @@ namespace Duty_Bot2
         protected global::System.Web.UI.WebControls.SqlDataSource sdsTypeSchedule;
 
         /// <summary>
+        /// Label1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
         /// lstUser элемент управления.
         /// </summary>
         /// <remarks>
@@ -114,6 +123,15 @@ namespace Duty_Bot2
         protected global::System.Web.UI.WebControls.DropDownList lstUser;
 
         /// <summary>
+        /// Label2 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
         /// lstTypeSchedule элемент управления.
         /// </summary>
         /// <remarks>
@@ -121,6 +139,15 @@ namespace Duty_Bot2
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList lstTypeSchedule;
+
+        /// <summary>
+        /// Label3 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// lstStatus элемент управления.

@@ -9,6 +9,24 @@
 
     </title>
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function CheckValidInput()
+        {
+            var textLength = $("#tbScheduleType").val().length;
+
+            if (textLength > 20) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+
+            if (textLength<1) {
+                alert("Проверьте корректность вводимой информации");
+                return false;
+            }
+            return true;
+        };
+    </script>
      <style type="text/css">
          .bt_Style {
          }
@@ -129,7 +147,7 @@
                     Text="Удалить" OnClick="btDelete_Click" Width="100px" ToolTip="Выберите данные из таблицы и нажмите на кнопку для удаления" />
 
                 <asp:Button ID="btInsert" runat="server" CssClass=" btn btn-primary"
-                    Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для внесения данных" />
+                  OnClientClick="return CheckValidInput()"  Text="Добавить"  Width="100px" OnClick="btInsert_Click" ToolTip="Нажмите на кнопку для внесения данных" />
                
                 <br />
                 
@@ -139,7 +157,7 @@
               <asp:button ID ="btBack" class="btn btn-outline-success my-2 my-sm-0" type="submit" ToolTip="Перейти на главное меню" runat="server" Text="Назад" Width="100px" OnClick="Button1_Click"  ></asp:button>
 
                 <asp:Button ID="btUpdate" runat="server" CssClass="btn btn-primary"
-                    Text="Изменить" Width="100px" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения" OnClick="btUpdate_Click"  />
+                   OnClientClick="return CheckValidInput()" Text="Изменить" Width="100px" ToolTip="Выберите данные из таблицы и нажмите на кнопку для изменения" OnClick="btUpdate_Click"  />
                 <br />
 
                 <br />

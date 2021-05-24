@@ -221,7 +221,7 @@ namespace Duty_Bot2
                 }
                 catch
                 {
-
+                    Response.Write("<script>alert(' На данные даты график уже сформирован. Воспользуйтесь поиском ');</script>");
                 }
                 finally
                 {
@@ -233,8 +233,15 @@ namespace Duty_Bot2
                 {
                     i = 0;
                 }
+                string tbDateValue;
+                Table_Class DateValue = new Table_Class(DBConnection.qrSchedule);
+                tbDateValue = DateValue.table.Rows[0][3].ToString();
+                if (tbDateValue == apDate.ToShortDateString())
+                {
+                    Response.Write("<script>alert(' Такая дата уже есть ');</script>");
+                }
 
-                
+
             }
             gvFill(QR);
             calendar1.Visible = false;

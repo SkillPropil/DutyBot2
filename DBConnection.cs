@@ -8,7 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Windows;
 using System.Net;
-
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Duty_Bot2
 {
@@ -26,7 +27,7 @@ namespace Duty_Bot2
         public DataTable dtWorkStatus = new DataTable("WorkStatus");
         //public DataTable dtRolePerm = new DataTable("RolePerm");
         /// Заполнение данных из БД в переменную
-        public static string  qrRole = "SELECT " +
+        public static string qrRole = "SELECT " +
          "[ID_Role], " +
          "[RoleName] as \"Наименование роли\" " +
          "FROM [dbo].[Role] ",
@@ -70,13 +71,12 @@ namespace Duty_Bot2
          "[RoleName] as \"Наименование роли\", " +
          "[Role_ID] " +
          "FROM [dbo].[User] " +
-         "INNER JOIN [dbo].[Role] ON [ID_Role] = [Role_ID] " ,
+         "INNER JOIN [dbo].[Role] ON [ID_Role] = [Role_ID] ",
 
        qrWorkStatus = "SELECT" +
         "[ID_Status], " +
         "[WorkStatus] as \"Статус смены\" " +
         "FROM [dbo].[WorkStatus]",
-
 
         qrScheduleExport = "SELECT " +
         "[UserName] + ' ' + [UserSurname] as \"Дежурный\" , " +
@@ -88,23 +88,41 @@ namespace Duty_Bot2
         "FROM [dbo].[Schedule]  " +
         "INNER JOIN [dbo].[User] ON [ID_User] = [User_ID] " +
         "INNER JOIN [dbo].[ScheduleType] ON [ID_ScheduleType] = [ScheduleType_ID] " +
-        "INNER JOIN [dbo].[WorkStatus] ON [ID_Status] = [Status_ID] ";
+        "INNER JOIN [dbo].[WorkStatus] ON [ID_Status] = [Status_ID] ",
+
+
+        qrOtchet = "SELECT " +
+        "[UserName] + ' ' + [UserSurname] as \"Дежурный\" , " +
+        "[WorkStatus] as \"Статус смены\", " +
+        "[WorkDate] as \"Дата смены\", " +
+        "[TimeIn] as \"Дата начала\", " +
+        "[TimeOut] as \"Дата ухода\", " +
+        "[NameScheduleType] as \"Тип графика\" " +
+        "FROM [dbo].[Schedule]  " +
+        "INNER JOIN [dbo].[User] ON [ID_User] = [User_ID] " +
+        "INNER JOIN [dbo].[ScheduleType] ON [ID_ScheduleType] = [ScheduleType_ID] " +
+        "INNER JOIN [dbo].[WorkStatus] ON [ID_Status] = [Status_ID] " +
+        "Where [Status_ID] = 1";
 
         private SqlCommand command = new SqlCommand("", connection);
         public static Int32 IDrecord, IDuser;
         public static string RolePerm_ID;
+        public static int ScheduleType=3;
 
         public void dbEnter(string login, string password)
         {
+            
+           
             /// Берем из базы данные пользователей для дальнейшей авторизации
             command.CommandText = "SELECT count(*) FROM [dbo].[User]" +
                 "where [Login] = '" + login + "' and [Password] = '" +
                 password + "'";
+            
             connection.Open();
             IDuser = Convert.ToInt32(command.ExecuteScalar().ToString());
             connection.Close();
         }
-
+        
         private void dtFill(DataTable table, string query)
         {
             command.CommandText = query;
@@ -113,28 +131,10 @@ namespace Duty_Bot2
             connection.Close();
         }
 
-        public Int32 Authorization(string User_Login, string User_Password)
-        {
-            Int32 ID_record = 0;
-            command.CommandType = System.Data.CommandType.Text;
-            command.CommandText = "select [dbo].[User]('"
-                + User_Login + "','" + User_Password + "')";
-            DBConnection.connection.Open();
-            ID_record = Convert.ToInt32(command.ExecuteScalar().ToString());
-            DBConnection.connection.Close();
-            return (ID_record);
-        }
+       
 
-        public void dbRole(string login, string password)
-        {
-            /// Берем из базы данные пользователей для дальнейшей авторизации
-            command.CommandText = "SELECT count(*) FROM [dbo].[User]" +
-                "where [RolePerm_ID] = '" +
-                password + "'";
-            connection.Open();
-            IDuser = Convert.ToInt32(command.ExecuteScalar().ToString());
-            connection.Close();
-        }
+      
+        
 
     }
 }
