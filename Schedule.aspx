@@ -8,6 +8,7 @@
     <title></title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <style type="text/css">
+        .inline {display:inline;}
         .navcenter {
             text-align: center;
         }
@@ -59,9 +60,10 @@
       
              </div>
                 <center>
-                    <div>
-                        <asp:Label Text="Дата, с которой формируется график" ID="lblDateIn" runat="server" Visible="false"/>
-                        <asp:Calendar id="calendar1" runat="server" BackColor="White" BorderColor="Black" Visible="false" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" Width="330px" ToolTip="Выберите дату">
+                   
+                        <div id="divCalendars" runat="server">
+                        <asp:Label Text="Дата, с которой формируется график" ID="lblDateIn" runat="server" Visible="false" style="position:relative;right:400px;margin-top:-10px;"/>
+                        <asp:Calendar style="position: relative; right:400px;" id="calendar1"  runat="server" BackColor="White" BorderColor="Black" Visible="false" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" Width="330px"  ToolTip="Выберите дату">
 
                             <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
 
@@ -84,8 +86,8 @@
 
       </asp:Calendar>
                         <br />
-                        <asp:Label Text="Дата по которую формируется график" ID="lblDateOut" runat="server" Visible="false"/>
-                        <asp:Calendar id="calendar2" runat="server" BackColor="White" BorderColor="Black" ToolTip="Выберите дату" Visible="false" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px"  Width="330px" >
+                        <asp:Label Text="Дата по которую формируется график" ID="lblDateOut" runat="server" Visible="false" style="position:absolute; top: 145px; left: 1354px; height: 31px; width: 380px;"/>
+                        <asp:Calendar style="position: relative; left:400px;margin-top:-270px;" id="calendar2" runat="server" BackColor="White" BorderColor="Black" float="right" ToolTip="Выберите дату" Visible="false" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px"  Width="330px" >
                             
                             <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
                             

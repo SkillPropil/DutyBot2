@@ -88,7 +88,9 @@
                             <asp:LinkButton class="nav-link p-2" ID="LinkButton7" runat="server"></asp:LinkButton>
                             
                         </li>
-                       
+                       <li class="nav-item active" id="navVersion">
+                            <asp:LinkButton class="nav-link" ID="LinkButton1" href="Version.aspx" runat="server">Версионность</asp:LinkButton>
+                        </li>
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link p-2" ID="LinkButton3" runat="server" OnClick="LinkButton3_Click">Выйти</asp:LinkButton>
                         </li>

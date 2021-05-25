@@ -69,14 +69,14 @@ namespace Duty_Bot2
                     break;
                 default:
                    
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(1000);
                     prgLoadingStatus.Visible = true;
-                    /// Определяем имя сессии
+                    /// Выбираем значение Роли из таблицы User
                     Table_Class roletable = new Table_Class(DBConnection.qrUser + string.Format("where [Login] = '{0}' and [Password] = '{1}'", tbLogin.Text, Passwords.ToString()));
                     DBConnection.RolePerm_ID = roletable.table.Rows[0][6].ToString();
 
                     var s = DBConnection.RolePerm_ID;
-
+                    /// Выбираем значение Статус смены из таблицы User
                     Table_Class Status1 = new Table_Class(DBConnection.qrUser);
                     DBConnection.Status = Status1.table.Rows[0][5].ToString();
 

@@ -43,7 +43,7 @@ namespace Duty_Bot2
                 }
             }
         }
-        // функция заполнения таблицы
+        /// функция заполнения таблицы
         private void gvFill(string qr)
         {
             sdsSchedule.ConnectionString = DBConnection.connection.ConnectionString.ToString();
@@ -66,8 +66,7 @@ namespace Duty_Bot2
         {
             Response.Redirect("MainMenu.aspx");
         }
-        // экспорт данных
-       
+     
 
         protected void gvSchedule_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -106,6 +105,7 @@ namespace Duty_Bot2
                 == SortDirection.Ascending ? "ASC" : "DESC";
             gvFill(QR + " order by " + e.SortExpression + " " + strDirection);
         }
+        /// Метод сортировки
         private void sortGridView(GridView gridView,
        GridViewSortEventArgs e,
        out SortDirection sortDirection,
@@ -174,12 +174,13 @@ namespace Duty_Bot2
 
         protected void btExport_Click(object sender, EventArgs e)
         {
-            // выбираем таблицу и источник данных
+            /// выбираем таблицу и источник данных
             GridView gv = new GridView();
             GridView gridView = gvScheduleExport;
             DBConnection.connection.Open();
             gv.DataSource = sdsScheduleExport;
             DBConnection.connection.Close();
+            ///Функция заполнения таблицы
             gvFill1(QR1);
 
 
@@ -210,15 +211,21 @@ namespace Duty_Bot2
 
         protected void btScheduleSform_Click(object sender, EventArgs e)
         {
+            ///Массив ID_User
             int[] userlist = new int[4] { 1, 2, 3, 4 };
             int i = 0;
+            /// Выбранные даты из календарей
             DateTime DateIn = calendar1.SelectedDate;
             DateTime DateOut = calendar2.SelectedDate;
             DateTime apDate = DateIn;
+            /// Время по умолчанию - 10:00
             string Time = "10:00";
+            /// Тип графика - дежурства
             int ScheduleType = 2;
+            /// Статус смены - назначена
             int Status = 2;
             SqlCommand command = new SqlCommand("", DBConnection.connection);
+            /// Если вводимое значение меньше или равно выбранной дате во втором календаре - выполняется условие
             while (apDate <= DateOut)
             {
                 command.CommandText = "INSERT INTO [dbo].[Schedule] ([WorkDate],[TimeIn],[TimeOut],[User_ID],[ScheduleType_ID],[Status_ID]) values ('" + apDate.ToShortDateString() + "','" + Time + "','" + Time + "','" + userlist[i] + "','" + ScheduleType + "','" + Status + "')";
@@ -235,12 +242,16 @@ namespace Duty_Bot2
                 {
                     DBConnection.connection.Close();
                 }
+                /// Прибавляем день после каждого круга
                 apDate = apDate.AddDays(1);
+                /// Перебираем значение массива
                 i++;
+               
                 if (i == 4)
                 {
                     i = 0;
                 }
+                /// Проверка на существующие даты, если дата есть - выпадет ошибка и скрипт завершится на следующих датах, если их нету в таблице
                 string tbDateValue;
                 Table_Class DateValue = new Table_Class(DBConnection.qrSchedule);
                 tbDateValue = DateValue.table.Rows[0][3].ToString();
@@ -251,6 +262,7 @@ namespace Duty_Bot2
 
 
             }
+            /// Скрываем элементы управления
             gvFill(QR);
             calendar1.Visible = false;
             calendar2.Visible = false;
@@ -262,6 +274,7 @@ namespace Duty_Bot2
 
         protected void btRaspr_Click(object sender, EventArgs e)
         {
+            ///Делаем видимые элементы управления
             lblDateIn.Visible = true;
             lblDateOut.Visible = true;
             calendar1.Visible = true;

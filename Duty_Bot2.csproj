@@ -170,6 +170,7 @@
     <Content Include="ScheduleRed.aspx" />
     <Content Include="ScheduleType.aspx" />
     <Content Include="User.aspx" />
+    <Content Include="Version.aspx" />
     <Content Include="wait.gif" />
     <Content Include="WorkStatus.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -316,6 +317,13 @@
     </Compile>
     <Compile Include="User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Version.aspx.cs">
+      <DependentUpon>Version.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Version.aspx.designer.cs">
+      <DependentUpon>Version.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
