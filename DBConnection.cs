@@ -108,6 +108,7 @@ namespace Duty_Bot2
         public static Int32 IDrecord, IDuser;
         public static string RolePerm_ID;
         public static int ScheduleType=3;
+        public static string Status;
 
         public void dbEnter(string login, string password)
         {

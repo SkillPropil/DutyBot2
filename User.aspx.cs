@@ -16,6 +16,14 @@ namespace Duty_Bot2
         private string QR = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (DBConnection.Status == "Неактивный")
+            {
+               
+
+                Response.Redirect("Authorization.aspx");
+
+            }
+
             if (DBConnection.RolePerm_ID == "Дежурный админ")
             {
                 Response.Redirect("MainMenu.aspx");

@@ -16,6 +16,14 @@ namespace Duty_Bot2
         // при загрузке страницы заполняется таблица
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (DBConnection.Status == "Неактивный")
+            {
+                
+
+                Response.Redirect("Authorization.aspx");
+
+            }
+
             if ((string)Session["uname"] == null)
             {
                 Response.Redirect("Authorization.aspx");

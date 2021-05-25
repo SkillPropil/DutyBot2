@@ -74,7 +74,12 @@ namespace Duty_Bot2
                     /// Определяем имя сессии
                     Table_Class roletable = new Table_Class(DBConnection.qrUser + string.Format("where [Login] = '{0}' and [Password] = '{1}'", tbLogin.Text, Passwords.ToString()));
                     DBConnection.RolePerm_ID = roletable.table.Rows[0][6].ToString();
+
                     var s = DBConnection.RolePerm_ID;
+
+                    Table_Class Status1 = new Table_Class(DBConnection.qrUser);
+                    DBConnection.Status = Status1.table.Rows[0][5].ToString();
+
                     Session["uname"] = tbLogin.Text;
                     Response.Redirect("MainMenu.aspx");
                     break;

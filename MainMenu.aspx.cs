@@ -13,6 +13,14 @@ namespace Duty_Bot2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (DBConnection.Status == "Неактивный")
+            {
+                
+                Response.Redirect("Authorization.aspx");
+
+            }
+
             if (DBConnection.RolePerm_ID == "Дежурный админ")
             {
                 LinkRole.Visible = false;
